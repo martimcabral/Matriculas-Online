@@ -847,6 +847,65 @@
 			</div>
 		</div>
 	</form>
+
+	<form action='MatriculaDocumentos.php' method='POST' enctype='multipart/form-data'>
+		<div class="container-fluid dashboard-content">
+			<div class="dashboard-short-list">
+				<div class="row">
+					<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+						<div class="card">
+							<h5 class="card-header">DOCUMENTOS OBRIGATÓRIOS</h5>
+							<div class="card-body">
+								<input hidden type="text" name="aluno_nif" value="<?php echo $NIF_ALUNO;?>">
+								<input hidden type="text" name="ee_nif" value="<?php echo $NIF_EE;?>">
+								<div>
+									<p>✔ Cartão de Identificação Civil do Aluno</p>
+									<p>✔ Cartão de Identificação do Pai, da Mãe e do Encarregado de Educação, se não for nenhum dos pais.</p>											
+									<p>✔ Comprovativo da Vacinação do Centro de Saúde</p>
+									<p>✔ Cópia de Documento que comprove o subsistema de saúde que abrange o aluno (Segurança Social / ADSE / EEs)</p>
+									<p>✔ Fotografia tipo Passe<br></p>
+								</div>
+								<div class="form-group">
+									<label class="col-form-group">Cartão do Cidadão do Aluno:</label>
+									<input type="file" name="cc_aluno">
+								</div>
+								<div class="form-group">
+									<label class="col-form-group">Cartão do Cidadão do Mãe:</label>
+									<input type="file" name="cc_mae">
+								</div>
+								<div class="form-group">
+									<label class="col-form-group">Cartão do Cidadão do Pai:</label>
+									<input type="file" name="cc_pai">
+								</div>
+								<div class="form-group">
+									<label class="col-form-group">Cartão do Cidadão da E.E.:</label>
+									<input type="file" name="cc_ee">
+								</div>
+								<div class="form-group">
+									<label class="col-form-group">Comprovativo de Vacinação:</label>
+									<input type="file" name="vacinacao">
+								</div>
+								<div class="form-group">
+									<label class="col-form-group">Comprovativo de Subsistema de Saúde:</label>
+									<input type="file" name="subsistema_de_saude">
+								</div>
+								<div class="form-group">
+									<label class="col-form-group">Comprovativo de Fotografia tipo Passe:</label>
+									<input type="file" name="fotografia_passe">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-12 pl-0">
+			<div class="text-center">
+				<button type="submit" class="btn btn-space btn-primary" id="MatriculaDocumentos">Atualizar Documentos</button>
+			</div>
+		</div>
+	</form>
+
 	<script src="../assets/vendor/jquery/jquery-3.3.1.min.js"></script>
     <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
     <script src="../assets/vendor/slimscroll/jquery.slimscroll.js"></script>

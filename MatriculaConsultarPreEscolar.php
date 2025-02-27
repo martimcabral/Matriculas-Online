@@ -182,13 +182,7 @@
 </head>
 
 <body>
-    <!-- ============================================================== -->
-    <!-- main wrapper -->
-    <!-- ============================================================== -->
     <div class="dashboard-main-wrapper">
-        <!-- ============================================================== -->
-        <!-- navbar -->
-        <!-- ============================================================== -->
 		<div class="dashboard-header">
             <nav class="navbar navbar-expand-lg bg-white fixed-top">
                 <a class="navbar-brand"><?php echo $TituloAplicacao; ?></a>
@@ -210,7 +204,6 @@
 				echo '<div class="dashboard-wrapper">';
 				}	
 		?>
-		<form action='MatriculaImprimir.php' method='POST'></form>
             <div class="container-fluid dashboard-content">
 				<div class="dashboard-short-list">
 					<div class="row">
@@ -694,7 +687,6 @@
 										<input style="padding: 7px;" id="NaoImagensAutorizacao" type="radio" name="AutorizacaoDeImagens" value="Não Autorizo" <?php if ($AUTORIZACAO_DE_IMAGENS_DO_ALUNO == "Não Autorizo") echo 'checked';?> disabled>
 										<label style="padding: 7px;" for="inputText3" class="col-form-label">Não Autorizo</label>
 									</div>
-			
 								</div>	
 							</div>	
 						</div>
@@ -753,7 +745,124 @@
 					</div>
 				</div>
 			</div>
-		</form>
+		<div style="margin-top: -80px;" class="container-fluid dashboard-content">
+				<div class="dashboard-short-list">
+					<div class="row">
+						<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+							<div class="card">
+								<h5 class="card-header">DOCUMENTOS OBRIGATÓRIOS</h5>
+								<div class="card-body">
+									<input hidden type="text" name="aluno_nif" value="<?php echo $ALUNO_NIF;?>">
+									<input hidden type="text" name="ee_nif" value="<?php echo $EE_NIF;?>">
+									<?php
+										$types = [
+											"png", 
+											"jpg", 
+											"jpeg", 
+											"pdf", 
+										];
+
+										$documents = [
+											'cc_aluno' => false,
+											'cc_mae' => false,
+											'cc_pai' => false,
+											'cc_ee' => false,
+											'vacinacao' => false,
+											'subsistema_de_saude' => false,
+											'fotografia_passe' => false,
+										];
+
+										foreach ($documents as $key => &$exists) {
+											foreach ($types as $type) {
+												$pasta = '../Ficheiros/Matriculas/1/' . $ALUNO_NIF . '.' . $EE_NIF . '/';
+												$file_name = $pasta . $key . '.' . $type;
+
+												if (file_exists($file_name)) {
+													$exists = true;
+													if ($key == "cc_aluno") {
+														$image_src_cc_aluno = $file_name;
+													} else if ($key == "cc_mae") {
+														$image_src_cc_mae = $file_name;
+													} else if ($key == "cc_pai") {
+														$image_src_cc_pai = $file_name;
+													} else if ($key == "cc_ee") {
+														$image_src_cc_ee = $file_name;
+													} else if ($key == "vacinacao") {
+														$image_src_vacinacao = $file_name;
+													} else if ($key == "subsistema_de_saude") {
+														$image_src_subsistema_de_saude = $file_name;
+													} else if ($key == "fotografia_passe") {
+														$image_src_fotografia_passe = $file_name;
+													}
+													break;
+												}
+											}
+										}
+									?>
+
+									<div class="form-group">
+										<i id="aluno_cc_close" class="m-r-10 mdi mdi-close" style="color: red; font-size: 16px; <?php echo $documents['cc_aluno'] ? 'display: none;' : ''; ?>">Por Entregar</i>
+										<i id="aluno_cc_check" class="m-r-10 mdi mdi-check" style="color: green; font-size: 16px; <?php echo $documents['cc_aluno'] ? '' : 'display: none;'; ?>">Entregue</i>
+										<label class="col-form-group">Cartão do Cidadão do Aluno:</label>
+									</div>
+									<div class="form-group">
+										<img style="max-width: 150px; max-height: 150px; width: auto; height: auto;" src="<?php echo $image_src_cc_aluno?>">
+									</div>
+									<div class="form-group">
+										<i id="mae_cc_close" class="m-r-10 mdi mdi-close" style="color: red; font-size: 16px; <?php echo $documents['cc_mae'] ? 'display: none;' : ''; ?>">Por Entregar</i>
+										<i id="mae_cc_check" class="m-r-10 mdi mdi-check" style="color: green; font-size: 16px; <?php echo $documents['cc_mae'] ? '' : 'display: none;'; ?>">Entregue</i>
+										<label class="col-form-group">Cartão do Cidadão da Mãe:</label>
+									</div>
+									<div class="form-group">
+										<img style="max-width: 150px; max-height: 150px; width: auto; height: auto;" src="<?php echo $image_src_cc_mae?>">
+									</div>
+									<div class="form-group">
+										<i id="pai_cc_close" class="m-r-10 mdi mdi-close" style="color: red; font-size: 16px; <?php echo $documents['cc_pai'] ? 'display: none;' : ''; ?>">Por Entregar</i>
+										<i id="pai_cc_check" class="m-r-10 mdi mdi-check" style="color: green; font-size: 16px; <?php echo $documents['cc_pai'] ? '' : 'display: none;'; ?>">Entregue</i>
+										<label class="col-form-group">Cartão do Cidadão do Pai:</label>
+									</div>
+									<div class="form-group">
+										<img style="max-width: 150px; max-height: 150px; width: auto; height: auto;" src="<?php echo $image_src_cc_pai?>">
+									</div>
+									<div class="form-group">
+										<i id="ee_cc_close" class="m-r-10 mdi mdi-close" style="color: red; font-size: 16px; <?php echo $documents['cc_ee'] ? 'display: none;' : ''; ?>">Por Entregar</i>
+										<i id="ee_cc_check" class="m-r-10 mdi mdi-check" style="color: green; font-size: 16px; <?php echo $documents['cc_ee'] ? '' : 'display: none;'; ?>">Entregue</i>
+										<label class="col-form-group">Cartão do Cidadão da E.E.:</label>
+									</div>
+									<div class="form-group">
+										<img style="max-width: 150px; max-height: 150px; width: auto; height: auto;" src="<?php echo $image_src_cc_ee?>">
+									</div>
+									<div class="form-group">
+										<i id="vacinacao_close" class="m-r-10 mdi mdi-close" style="color: red; font-size: 16px; <?php echo $documents['vacinacao'] ? 'display: none;' : ''; ?>">Por Entregar</i>
+										<i id="vacinacao_check" class="m-r-10 mdi mdi-check" style="color: green; font-size: 16px; <?php echo $documents['vacinacao'] ? '' : 'display: none;'; ?>">Entregue</i>
+										<label class="col-form-group">Comprovativo de Vacinação:</label>
+									</div>
+									<div class="form-group">
+										<img style="max-width: 150px; max-height: 150px; width: auto; height: auto;" src="<?php echo $image_src_vacinacao?>">
+									</div>
+									<div class="form-group">
+										<i id="subsistema_close" class="m-r-10 mdi mdi-close" style="color: red; font-size: 16px; <?php echo $documents['subsistema_de_saude'] ? 'display: none;' : ''; ?>">Por Entregar</i>
+										<i id="subsistema_check" class="m-r-10 mdi mdi-check" style="color: green; font-size: 16px; <?php echo $documents['subsistema_de_saude'] ? '' : 'display: none;'; ?>">Entregue</i>
+										<label class="col-form-group">Comprovativo de Subsistema de Saúde:</label>
+									</div>
+									<div class="form-group">
+										<img style="max-width: 150px; max-height: 150px; width: auto; height: auto;" src="<?php echo $image_src_subsistema_de_saude?>">
+									</div>
+									<div class="form-group">
+										<i id="fotografia_close" class="m-r-10 mdi mdi-close" style="color: red; font-size: 16px; <?php echo $documents['fotografia_passe'] ? 'display: none;' : ''; ?>">Por Entregar</i>
+										<i id="fotografia_check" class="m-r-10 mdi mdi-check" style="color: green; font-size: 16px; <?php echo $documents['fotografia_passe'] ? '' : 'display: none;'; ?>">Entregue</i>
+										<label class="col-form-group">Comprovativo de Fotografia tipo Passe:</label>
+									</div>
+									<div class="form-group">
+										<img style="max-width: 150px; max-height: 150px; width: auto; height: auto;" src="<?php echo $image_src_fotografia_passe?>">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<v>
+			</div>
+		</div>
     </div>
 	<script src="../assets/vendor/jquery/jquery-3.3.1.min.js"></script>
     <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>

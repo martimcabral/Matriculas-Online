@@ -64,14 +64,7 @@
 </head>
 
 <body>
-
-    <!-- ============================================================== -->
-    <!-- main wrapper -->
-    <!-- ============================================================== -->
     <div class="dashboard-main-wrapper">
-        <!-- ============================================================== -->
-        <!-- navbar -->
-        <!-- ============================================================== -->
         <div class="dashboard-header">
             <nav class="navbar navbar-expand-lg bg-white fixed-top">
                 <a class="navbar-brand"><?php echo $TituloAplicacao; ?></a>
@@ -108,7 +101,8 @@
 											case null: echo '<h5 class="mb-0">Lista de Matrículas</h5>'; break;
 											case 1: echo '<h5 class="mb-0">Lista de Matrículas - Secretaria</h5>'; break;
 											case 2: echo '<h5 class="mb-0">Lista de Matrículas - Diretor de Turmas</h5>'; break;
-											case 3: echo '<h5 class="mb-0">Lista de Matrículas - Informática</h5>'; break;
+											case 3: echo '<h5 class="mb-0">Lista de Matrículas - Gestão de Matrículas</h5>'; break;
+											case 4: echo '<h5 class="mb-0">Lista de Matrículas - Informática</h5>'; break;
 										}
 
 										echo '<div class="card-body">';
@@ -182,11 +176,27 @@
 																<img title='Imprimir Matrícula' src='../Images/Icons/correio_pdf_nao.png' height='17px' width='17px'/>
 															</button>
 														</a>";
-
-												if ($ESTADO == 1) {
+												
+												if ($ESTADO != 0) {
 													echo "<a href='" . $linkDir_Matriculas . "MatriculaEditarPreEscolar.php?id=" . $ID_PREESCOLAR . "'>
 														<button class='btn btn-sm btn-outline-light'>
 															<img title='Editar Matrícula' src='../Images/Icons/correio_edit.png' height='17px' width='17px'/>
+														</button>
+													</a>";
+												}
+												
+												if ($ESTADO == 1 || $ESTADO == 2) {
+													echo "<a href='" . $linkDir_Matriculas . "MatriculaEnviarParaGestão.php?id=" . $ID_PREESCOLAR . "&matricula=1" . "&estado=3'>
+													<button class='btn btn-sm btn-outline-light'>
+															<img title='Enviar para Gestão de Matrículas' src='../Images/Icons/enviar.png' height='17px' width='17px'/>
+														</button>
+													</a>";
+												}
+
+												if ($ESTADO == 3) {
+													echo "<a href='" . $linkDir_Matriculas . "MatriculaEnviarParaGestão.php?id=" . $ID_PREESCOLAR . "&matricula=1" . "&estado=4'>
+													<button class='btn btn-sm btn-outline-light'>
+															<img title='Enviar para Informática' src='../Images/Icons/enviar.png' height='17px' width='17px'/>
 														</button>
 													</a>";
 												}
@@ -216,10 +226,26 @@
 																	<img title='Imprimir Matrícula' src='../Images/Icons/correio_pdf_nao.png' height='17px' width='17px'/>
 																</button>
 															</a>";
-												if ($ESTADO == 1) {
+												if ($ESTADO != 0) {
 													echo "<a href='" . $linkDir_Matriculas . "MatriculaEditar123Ciclos.php?id=" . $ID_123CICLOS . "'>
 														<button class='btn btn-sm btn-outline-light'>
 															<img title='Editar Matrícula' src='../Images/Icons/correio_edit.png' height='17px' width='17px'/>
+														</button>
+													</a>";
+												}
+
+												if ($ESTADO == 1 || $ESTADO == 2) {
+													echo "<a href='" . $linkDir_Matriculas . "MatriculaEnviarParaGestão.php?id=" . $ID_PREESCOLAR . "&matricula=2" . "%estado=3'>
+													<button class='btn btn-sm btn-outline-light'>
+															<img title='Enviar para Gestão de Matrículas' src='../Images/Icons/enviar.png' height='17px' width='17px'/>
+														</button>
+													</a>";
+												}
+
+												if ($ESTADO == 3) {
+													echo "<a href='" . $linkDir_Matriculas . "MatriculaEnviarParaGestão.php?id=" . $ID_PREESCOLAR . "&matricula=2" . "&estado=4'>
+													<button class='btn btn-sm btn-outline-light'>
+															<img title='Enviar para Informática' src='../Images/Icons/enviar.png' height='17px' width='17px'/>
 														</button>
 													</a>";
 												}
@@ -250,10 +276,26 @@
 																</button>
 															</a>";
 
-												if ($ESTADO == 1) {
+												if ($ESTADO != 0) {
 													echo "<a href='" . $linkDir_Matriculas . "MatriculaEditar9ano.php?id=" . $ID_9ANO . "'>
 														<button class='btn btn-sm btn-outline-light'>
 															<img title='Editar Matrícula' src='../Images/Icons/correio_edit.png' height='17px' width='17px'/>
+														</button>
+													</a>";
+												}
+
+												if ($ESTADO == 1 || $ESTADO == 2) {
+													echo "<a href='" . $linkDir_Matriculas . "MatriculaEnviarParaGestão.php?id=" . $ID_PREESCOLAR . "&matricula=3" . "&estado=3'>
+													<button class='btn btn-sm btn-outline-light'>
+															<img title='Enviar para Gestão de Matrículas' src='../Images/Icons/enviar.png' height='17px' width='17px'/>
+														</button>
+													</a>";
+												}
+
+												if ($ESTADO == 3) {
+													echo "<a href='" . $linkDir_Matriculas . "MatriculaEnviarParaGestão.php?id=" . $ID_PREESCOLAR . "&matricula=1" . "&estado=4'>
+													<button class='btn btn-sm btn-outline-light'>
+															<img title='Enviar para Informática' src='../Images/Icons/enviar.png' height='17px' width='17px'/>
 														</button>
 													</a>";
 												}
@@ -273,14 +315,13 @@
                     </div>
                 </div>
             </div>
+		</div>
+		<?php include('../rodape.php'); ?>
+	</div>
+			
 					
-                   
-            </div>
        
   
-			<?php include('../rodape.php'); ?>
-            </div>
-    </div>
    
   
 	<script src="../assets/vendor/jquery/jquery-3.3.1.min.js"></script>
@@ -292,12 +333,11 @@
     <script src="../assets/vendor/shortable-nestable/jquery.nestable.js"></script>
    
 	
-</body>
- 
+</body> 
 </html>
 
 <?php 
 
-	}else{header('location: '.$link.'index.php');}  
+	}else{header('location: '.$link.'index.php');}
 
 ?>

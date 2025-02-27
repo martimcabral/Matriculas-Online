@@ -50,8 +50,8 @@
 	/*
 		0 - Primeira vez a ser criada, pode ser aleterada
 		1 - Pertence a Secretaria, NAO pode ser alterada
-		2 - Pertence ao Diretor de Turma, NAO pode ser alterada
-		3 - Pertence à Informatica, NAO pode ser alterada
+		3 - Pertence à Gestão de Matriculas
+		4 - Pertence à Informatica
 	*/
 	
 	include('../db.php');
